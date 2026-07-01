@@ -1,0 +1,153 @@
+---
+interface Props {
+  summary: string;
+  title: string;
+}
+const { summary, title } = Astro.props;
+---
+<div class="audio-reader" id="audio-reader" data-summary={`${title}. Résumé de l'article : ${summary}`} hidden>
+  <div class="audio-reader-icon" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor" stroke="none"/>
+      <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+      <path d="M18.5 5.5a9.5 9.5 0 0 1 0 13"/>
+    </svg>
+  </div>
+  <div class="audio-reader-body">
+    <strong>Écouter cet article</strong>
+    <p>Résumé vocal ou lecture complète, directement dans votre navigateur.</p>
+    <div class="audio-reader-actions">
+      <button type="button" class="audio-btn" id="btn-resume" data-mode="summary">▶ Le résumé</button>
+      <button type="button" class="audio-btn" id="btn-article" data-mode="article">▶ L'article entier</button>
+      <button type="button" class="audio-btn audio-btn-stop" id="btn-stop" hidden>■ Arrêter</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.audio-reader {
+  max-width: 760px;
+  margin: 2.5rem auto 0;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-teal-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+}
+.audio-reader { margin-left: 1.5rem; margin-right: 1.5rem; }
+@media (min-width: 812px) { .audio-reader { margin-left: auto; margin-right: auto; } }
+.audio-reader-icon { color: var(--color-teal); flex-shrink: 0; margin-top: 0.2rem; }
+.audio-reader-body strong { color: var(--color-heading); font-size: 0.95rem; }
+.audio-reader-body p { font-size: 0.85rem; color: var(--color-text-muted); margin: 0.15rem 0 0.85rem; }
+.audio-reader-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.audio-btn {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.45rem 1rem;
+  border-radius: 30px;
+  border: 1px solid var(--color-teal-border);
+  background: var(--color-bg);
+  color: var(--color-teal);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.audio-btn:hover { background: var(--color-teal); color: var(--color-white); }
+.audio-btn.playing { background: var(--color-teal); color: var(--color-white); }
+.audio-btn-stop { border-color: rgba(241, 140, 121, 0.6); color: #c9563f; }
+.audio-btn-stop:hover { background: var(--color-coral); border-color: var(--color-coral); color: var(--color-white); }
+</style>
+
+<script>
+const reader = document.getElementById('audio-reader');
+const btnResume = document.getElementById('btn-resume') as HTMLButtonElement;
+const btnArticle = document.getElementById('btn-article') as HTMLButtonElement;
+const btnStop = document.getElementById('btn-stop') as HTMLButtonElement;
+
+if (reader && 'speechSynthesis' in window) {
+  reader.hidden = false;
+  const synth = window.speechSynthesis;
+  let activeBtn: HTMLButtonElement | null = null;
+
+  const labels = {
+    summary: { idle: '▶ Le résumé', playing: '⏸ Pause', paused: '▶ Reprendre' },
+    article: { idle: "▶ L'article entier", playing: '⏸ Pause', paused: '▶ Reprendre' },
+  };
+
+  function getFrenchVoice() {
+    const voices = synth.getVoices();
+    return (
+      voices.find(v => v.lang === 'fr-CA') ||
+      voices.find(v => v.lang === 'fr-FR') ||
+      voices.find(v => v.lang.startsWith('fr')) ||
+      null
+    );
+  }
+
+  function getText(mode: string): string {
+    if (mode === 'summary') return reader.dataset.summary || '';
+    const content = document.querySelector('.article-content');
+    return content ? (content as HTMLElement).innerText : '';
+  }
+
+  function setLabel(btn: HTMLButtonElement, state: 'idle' | 'playing' | 'paused') {
+    const mode = btn.dataset.mode as 'summary' | 'article';
+    btn.textContent = labels[mode][state];
+    btn.classList.toggle('playing', state === 'playing');
+  }
+
+  function resetAll() {
+    setLabel(btnResume, 'idle');
+    setLabel(btnArticle, 'idle');
+    btnStop.hidden = true;
+    activeBtn = null;
+  }
+
+  function speak(btn: HTMLButtonElement) {
+    synth.cancel();
+    const text = getText(btn.dataset.mode || 'summary');
+    if (!text) return;
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = getFrenchVoice();
+    if (voice) utterance.voice = voice;
+    utterance.lang = voice?.lang || 'fr-FR';
+    utterance.rate = 1;
+    utterance.onend = resetAll;
+    utterance.onerror = resetAll;
+    synth.speak(utterance);
+    activeBtn = btn;
+    resetAllExcept(btn);
+    setLabel(btn, 'playing');
+    btnStop.hidden = false;
+  }
+
+  function resetAllExcept(btn: HTMLButtonElement) {
+    [btnResume, btnArticle].forEach(b => { if (b !== btn) setLabel(b, 'idle'); });
+  }
+
+  function handleClick(btn: HTMLButtonElement) {
+    if (activeBtn === btn) {
+      if (synth.paused) {
+        synth.resume();
+        setLabel(btn, 'playing');
+      } else {
+        synth.pause();
+        setLabel(btn, 'paused');
+      }
+    } else {
+      speak(btn);
+    }
+  }
+
+  btnResume.addEventListener('click', () => handleClick(btnResume));
+  btnArticle.addEventListener('click', () => handleClick(btnArticle));
+  btnStop.addEventListener('click', () => { synth.cancel(); resetAll(); });
+
+  window.addEventListener('beforeunload', () => synth.cancel());
+  if (synth.getVoices().length === 0) {
+    synth.addEventListener?.('voiceschanged', () => {});
+  }
+}
+</script>

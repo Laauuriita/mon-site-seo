@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Comments from '../../components/Comments.astro';
+import AudioReader from '../../components/AudioReader.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -53,6 +54,8 @@ const heroImg = post.data.heroImage || 'https://images.unsplash.com/photo-167744
       )}
     </div>
   </div>
+
+  <AudioReader summary={post.data.description} title={post.data.title} />
 
   <div class="article-content">
     <Content />

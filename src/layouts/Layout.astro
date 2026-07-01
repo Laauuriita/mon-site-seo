@@ -15,7 +15,7 @@ interface Props {
 const {
   title,
   description = "Lagon Web — blog sur le référencement naturel, l'IA appliquée au contenu, les LLM et le GEO (Generative Engine Optimization), écrit depuis le Québec.",
-  image = "/og-image.jpg",
+  image = "/images/logo-lagon-web.png",
   type = "website",
   publishedTime,
   author = "Laura",
@@ -86,7 +86,8 @@ const schemaOrg = type === "article" ? {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${siteUrl}${image}`} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#ffffff" />
 
     <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />

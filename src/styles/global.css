@@ -1,33 +1,51 @@
 /* ============================================
    LAGON WEB — CHARTE GRAPHIQUE
-   Lagon sur fond blanc
+   D'après la charte officielle Lagon Web 2023
+   Turquoise lagon #1992a1 · Ardoise #325363 · Écume #d2ebf0
    ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,800;0,900;1,300&family=Abril+Fatface&display=swap');
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-extrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --color-bg:          #ffffff;
-  --color-surface:     #f2f9f8;
+  --color-surface:     #eef7f9;
   --color-surface-2:   #ffffff;
-  --color-surface-3:   #e9f4f2;
-  --color-teal:        #1b7c77;
-  --color-teal-light:  #145e5a;
-  --color-teal-dim:    rgba(27, 124, 119, 0.09);
-  --color-teal-border: rgba(27, 124, 119, 0.25);
-  --color-heading:     #0e3b3d;
-  --color-text:        #27373c;
-  --color-text-muted:  #5c6f74;
+  --color-surface-3:   #d2ebf0;
+  --color-teal:        #1992a1;
+  --color-teal-light:  #0b7675;
+  --color-teal-dim:    rgba(25, 146, 161, 0.09);
+  --color-teal-border: rgba(25, 146, 161, 0.3);
+  --color-heading:     #325363;
+  --color-text:        #3c525e;
+  --color-text-muted:  #64808c;
+  --color-coral:       #f18c79;
   --color-white:       #ffffff;
-  --color-border:      rgba(14, 59, 61, 0.1);
+  --color-border:      rgba(50, 83, 99, 0.12);
 
-  --font-heading: 'Sora', system-ui, -apple-system, sans-serif;
-  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-body:    'Gilroy', 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-quote:   'Abril Fatface', Georgia, serif;
 
   --radius:      10px;
   --radius-lg:   16px;
   --transition:  0.22s ease;
-  --shadow:      0 2px 16px rgba(14, 59, 61, 0.06);
-  --shadow-lg:   0 8px 32px rgba(14, 59, 61, 0.1);
-  --shadow-teal: 0 6px 24px rgba(27, 124, 119, 0.16);
+  --shadow:      0 2px 16px rgba(50, 83, 99, 0.07);
+  --shadow-lg:   0 8px 32px rgba(50, 83, 99, 0.12);
+  --shadow-teal: 0 6px 24px rgba(25, 146, 161, 0.18);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,6 +53,7 @@ html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
+  font-weight: 300;
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.75;
@@ -42,6 +61,8 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+strong { font-weight: 600; font-family: 'Poppins', var(--font-body); }
 
 main { flex: 1; }
 img { max-width: 100%; height: auto; display: block; }
@@ -51,6 +72,7 @@ a:hover { color: var(--color-teal-light); }
 
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
+  font-weight: 800;
   line-height: 1.25;
   color: var(--color-heading);
   letter-spacing: -0.02em;
@@ -80,7 +102,8 @@ h1, h2, h3, h4 {
   height: 68px;
 }
 
-.logo { display: flex; flex-direction: column; text-decoration: none; gap: 0.1rem; }
+.logo { display: flex; flex-direction: column; text-decoration: none; gap: 0.15rem; }
+.logo-img { height: 42px; width: auto; }
 .logo-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--color-heading); letter-spacing: -0.01em; }
 .logo-subtitle { font-size: 0.65rem; color: var(--color-text-muted); letter-spacing: 0.12em; text-transform: uppercase; }
 .logo:hover .logo-title { color: var(--color-teal); }
@@ -147,7 +170,7 @@ h1, h2, h3, h4 {
   border-radius: 30px;
   margin-bottom: 1.75rem;
 }
-.hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); color: var(--color-heading); margin-bottom: 1.25rem; font-weight: 800; }
+.hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); color: var(--color-heading); margin-bottom: 1.25rem; font-weight: 900; }
 .hero h1 .accent { color: var(--color-teal); display: block; }
 .hero p { font-size: 1.1rem; color: var(--color-text-muted); margin-bottom: 2.5rem; max-width: 580px; margin-left: auto; margin-right: auto; line-height: 1.7; }
 .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
@@ -232,7 +255,7 @@ h1, h2, h3, h4 {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(10, 42, 43, 0.92) 0%, rgba(10, 42, 43, 0.45) 50%, rgba(10, 42, 43, 0.15) 100%);
+  background: linear-gradient(to top, rgba(50, 83, 99, 0.94) 0%, rgba(50, 83, 99, 0.45) 50%, rgba(50, 83, 99, 0.15) 100%);
 }
 .article-hero-content { position: relative; z-index: 2; width: 100%; max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem; }
 .article-hero .breadcrumb { font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem; }
@@ -249,7 +272,7 @@ h1, h2, h3, h4 {
 .article-content p { margin-bottom: 1.5rem; }
 .article-content ul, .article-content ol { margin: 1rem 0 1.5rem 1.5rem; }
 .article-content li { margin-bottom: 0.6rem; }
-.article-content blockquote { border-left: 3px solid var(--color-teal); padding: 1.25rem 1.5rem; background: var(--color-surface); border-radius: 0 var(--radius) var(--radius) 0; margin: 2rem 0; font-style: italic; color: var(--color-text-muted); }
+.article-content blockquote { border-left: 3px solid var(--color-coral); padding: 1.25rem 1.5rem; background: var(--color-surface); border-radius: 0 var(--radius) var(--radius) 0; margin: 2rem 0; font-family: var(--font-quote); font-style: italic; font-size: 1.1em; color: var(--color-heading); }
 .article-content img { border-radius: var(--radius-lg); margin: 2rem 0; width: 100%; }
 .article-content code { background: var(--color-surface-3); color: var(--color-teal-light); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
 .article-content pre { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.5rem; margin: 2rem 0; overflow-x: auto; }
@@ -291,7 +314,7 @@ h1, h2, h3, h4 {
 .form-submit:hover { background: var(--color-teal-light); transform: translateY(-1px); box-shadow: var(--shadow-teal); }
 
 /* FOOTER */
-.site-footer { background-color: #0e3b3d; color: rgba(255,255,255,0.65); padding: 3.5rem 1.5rem 1.5rem; margin-top: auto; }
+.site-footer { background-color: #325363; color: rgba(255,255,255,0.65); padding: 3.5rem 1.5rem 1.5rem; margin-top: auto; }
 .footer-inner { max-width: 1100px; margin: 0 auto; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
 .footer-brand .logo-title { color: #ffffff; font-family: var(--font-heading); font-size: 1.15rem; margin-bottom: 0.75rem; display: block; }
@@ -300,9 +323,9 @@ h1, h2, h3, h4 {
 .footer-nav ul { list-style: none; }
 .footer-nav li { margin-bottom: 0.5rem; }
 .footer-nav a { color: rgba(255,255,255,0.65); font-size: 0.88rem; transition: color var(--transition); }
-.footer-nav a:hover { color: #7fd1cb; }
+.footer-nav a:hover { color: #8bced3; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.8rem; }
-.footer-teal { color: #7fd1cb; }
+.footer-teal { color: var(--color-coral); }
 
 /* SEO SECTION */
 .seo-section { background: var(--color-surface); border-top: 1px solid var(--color-border); padding: 3.5rem 1.5rem; }
