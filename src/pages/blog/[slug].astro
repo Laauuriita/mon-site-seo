@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Comments from '../../components/Comments.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const allPosts = await getCollection('blog');
+const otherPosts = allPosts
+  .filter(p => p.id !== post.id)
+  .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
+  .slice(0, 2);
+
+const heroImg = post.data.heroImage || 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1600&q=75&auto=format&fit=crop';
+---
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.heroImage}
+  type="article"
+  publishedTime={post.data.pubDate.toISOString()}
+  author={post.data.author || "Laura"}
+>
+
+  <div class="article-hero">
+    <img src={heroImg} alt={post.data.title} class="article-hero-img" loading="eager" />
+    <div class="article-hero-content">
+      <p class="breadcrumb">
+        <a href="/">Accueil</a> › <a href="/blog">Blog</a> › {post.data.title}
+      </p>
+      <span class="card-category" style="display: inline-block; margin-bottom: 1rem;">{post.data.category}</span>
+      <h1>{post.data.title}</h1>
+      <div class="article-meta">
+        <span class="author-chip">✍️ {post.data.author || 'Laura'}</span>
+        <span>📅 {new Date(post.data.pubDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+        <span>⏱️ {post.data.readTime} min de lecture</span>
+      </div>
+      {post.data.tags && (
+        <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          {post.data.tags.map((tag: string) => (
+            <span style="font-size: 0.75rem; background: rgba(0,212,176,0.1); color: var(--color-teal); padding: 0.2rem 0.65rem; border-radius: 20px; border: 1px solid var(--color-teal-border);">#{tag}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+
+  <div class="article-content">
+    <Content />
+  </div>
+
+  {otherPosts.length > 0 && (
+    <section class="section section-alt">
+      <div class="container">
+        <h2 style="font-size: 1.4rem; margin-bottom: 2rem; text-align: center;">À lire aussi</h2>
+        <div class="cards-grid" style="max-width: 760px; margin: 0 auto;">
+          {otherPosts.map(p => (
+            <article class="card">
+              <div class="card-image-placeholder">{p.data.emoji || '🔍'}</div>
+              <div class="card-body">
+                <span class="card-category">{p.data.category}</span>
+                <h3><a href={`/blog/${p.id}`}>{p.data.title}</a></h3>
+                <p>{p.data.description.substring(0, 100)}...</p>
+                <a href={`/blog/${p.id}`} class="card-read-more">Lire l'article</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <div class="article-nav">
+    <a href="/blog" class="btn btn-outline">← Retour au blog</a>
+    <a href="/contact" class="btn btn-primary">Me contacter</a>
+  </div>
+
+  <Comments />
+
+</Layout>

@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="Contact"
+  description="Contactez Laura pour un audit SEO, une mission de conseil ou une question sur le SEO, l'IA ou le GEO."
+>
+
+  <div class="page-header">
+    <h1>Contact</h1>
+    <p>Une question, un projet, un audit ? Je réponds à tous les messages.</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Parlons-en</h2>
+          <p>Que ce soit pour un audit SEO, une mission de conseil, une formation sur l'IA ou simplement pour échanger sur le GEO — écris-moi.</p>
+
+          <div class="contact-item">
+            <span class="contact-item-icon">📍</span>
+            <div class="contact-item-text">
+              <strong>Localisation</strong>
+              Montréal, Québec, Canada
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">🕐</span>
+            <div class="contact-item-text">
+              <strong>Délai de réponse</strong>
+              Sous 48h ouvrées
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">🌐</span>
+            <div class="contact-item-text">
+              <strong>Langues</strong>
+              Français & Anglais
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">💼</span>
+            <div class="contact-item-text">
+              <strong>Disponibilité</strong>
+              Missions ponctuelles & accompagnement continu
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+            <input type="hidden" name="access_key" value="a1ee29bd-ed7e-49c8-b852-623605cb72a5" />
+            <input type="hidden" name="subject" value="Nouveau message — Laura SEO" />
+            <input type="hidden" name="redirect" value="false" />
+
+            <div class="form-group">
+              <label for="name">Votre nom</label>
+              <input type="text" id="name" name="name" placeholder="Prénom Nom" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="vous@exemple.com" required />
+            </div>
+            <div class="form-group">
+              <label for="sujet">Sujet</label>
+              <select id="sujet" name="sujet">
+                <option value="audit-seo">Audit SEO</option>
+                <option value="conseil">Mission de conseil</option>
+                <option value="formation">Formation SEO / IA / GEO</option>
+                <option value="question">Question générale</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Décrivez votre projet ou votre question..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Envoyer le message →</button>
+          </form>
+          <div id="success" style="display:none; margin-top: 1.5rem; padding: 1rem; background: var(--color-teal-dim); border: 1px solid var(--color-teal-border); border-radius: var(--radius); color: var(--color-teal); text-align: center;">
+            ✅ Message envoyé ! Je reviens vers vous sous 48h.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+const form = document.getElementById('contact-form') as HTMLFormElement;
+const success = document.getElementById('success');
+
+form?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+  if (res.ok) {
+    form.style.display = 'none';
+    if (success) success.style.display = 'block';
+  }
+});
+</script>

@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="À propos"
+  description="Laura — Spécialiste SEO française au Québec. Expertise en référencement naturel, IA appliquée au contenu et GEO (Generative Engine Optimization)."
+>
+
+  <div class="page-header">
+    <span class="card-category" style="display: inline-block; margin-bottom: 1rem;">Spécialiste SEO · IA · GEO</span>
+    <h1>À propos</h1>
+    <p>Française installée à Montréal. Je travaille le SEO depuis plus de 8 ans.</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div class="about-avatar-placeholder">🔍</div>
+        </div>
+        <div class="about-content">
+          <h2>Laura</h2>
+          <p class="tagline">Spécialiste SEO · IA · GEO — Montréal, Québec</p>
+          <p>Je suis une spécialiste SEO française installée à Montréal depuis 2021. Mon expertise couvre le référencement naturel dans toute sa complexité — du SEO technique à la stratégie de contenu, en passant par l'utilisation de l'intelligence artificielle et l'optimisation pour les moteurs de recherche génératifs (GEO).</p>
+          <p>Avant le SEO, j'étais nageuse sauveteur de haut niveau. Ce que j'ai appris dans l'eau : lire les situations rapidement, anticiper, et ne jamais céder à la panique quand les algorithmes changent. C'est exactement ce qu'il faut pour faire du bon SEO en 2025.</p>
+          <p>Ce blog est mon carnet de bord professionnel. J'écris ce que j'applique réellement — pas des articles génériques, mais des analyses issues du terrain.</p>
+
+          <div class="facts-grid" style="margin-top: 2.5rem;">
+            <div class="fact-card">
+              <div class="fact-icon">📅</div>
+              <div class="fact-label">Expérience</div>
+              <div class="fact-value">8+ ans SEO</div>
+            </div>
+            <div class="fact-card">
+              <div class="fact-icon">📍</div>
+              <div class="fact-label">Localisation</div>
+              <div class="fact-value">Montréal, QC</div>
+            </div>
+            <div class="fact-card">
+              <div class="fact-icon">🌐</div>
+              <div class="fact-label">Langues</div>
+              <div class="fact-value">FR · EN</div>
+            </div>
+            <div class="fact-card">
+              <div class="fact-icon">🎯</div>
+              <div class="fact-label">Spécialité</div>
+              <div class="fact-value">SEO · IA · GEO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Mon parcours</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="timeline" style="max-width: 680px; margin: 0 auto; padding-left: 2rem; position: relative;">
+        <div style="position: absolute; left: 0.6rem; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--color-teal), transparent); opacity: 0.4;"></div>
+
+        {[
+          { year: "2025", title: "Lancement de Laura SEO", desc: "Création de ce blog pour partager mes analyses sur le SEO, l'IA et le GEO." },
+          { year: "2023", title: "Spécialisation IA & GEO", desc: "Avec l'émergence de ChatGPT et Perplexity, je me spécialise dans l'optimisation pour les IA conversationnelles." },
+          { year: "2021", title: "Installation au Québec", desc: "Arrivée à Montréal. Je continue à travailler avec des clients français et québécois." },
+          { year: "2018", title: "SEO Senior & Consulting", desc: "Premières missions de conseil SEO pour des marques e-commerce et médias en France." },
+          { year: "2016", title: "Débuts en SEO", desc: "Premiers pas dans le référencement naturel, après une carrière sportive de haut niveau." },
+        ].map(item => (
+          <div style="position: relative; padding: 0 0 2rem 1.5rem;">
+            <div style="position: absolute; left: -1.5rem; top: 0.4rem; width: 10px; height: 10px; border-radius: 50%; background: var(--color-teal); box-shadow: 0 0 0 3px var(--color-teal-dim);"></div>
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--color-teal); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem;">{item.year}</div>
+            <h4 style="font-size: 1rem; font-family: var(--font-body); font-weight: 600; color: var(--color-white); margin-bottom: 0.35rem;">{item.title}</h4>
+            <p style="font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.6;">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-section">
+        <h2>Travaillons ensemble</h2>
+        <p>Audit SEO, stratégie de contenu, formation à l'IA ou au GEO — je suis disponible pour des missions ponctuelles ou un accompagnement continu.</p>
+        <a href="/contact" class="btn btn-primary">Me contacter</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+.about-grid { display: grid; grid-template-columns: 1fr 2.5fr; gap: 4rem; align-items: start; max-width: 960px; margin: 0 auto; }
+.about-avatar-placeholder { width: 100%; aspect-ratio: 1; border-radius: 50%; background: var(--color-surface-2); border: 2px solid var(--color-teal-border); display: flex; align-items: center; justify-content: center; font-size: 5rem; box-shadow: var(--shadow-teal); }
+.about-content h2 { font-size: 2rem; margin-bottom: 0.4rem; }
+.tagline { color: var(--color-teal); font-size: 1rem; font-weight: 500; margin-bottom: 1.5rem; display: block; }
+.about-content p { margin-bottom: 1.25rem; color: var(--color-text-muted); line-height: 1.8; }
+.facts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+.fact-card { background: var(--color-surface-2); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; text-align: center; transition: border-color var(--transition); }
+.fact-card:hover { border-color: var(--color-teal-border); }
+.fact-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+.fact-label { font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.fact-value { font-size: 1rem; font-weight: 600; color: var(--color-white); margin-top: 0.25rem; }
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-avatar-placeholder { max-width: 160px; margin: 0 auto; }
+}
+</style>

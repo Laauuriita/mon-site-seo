@@ -1,0 +1,88 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort(
+  (a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+);
+
+const categories = [
+  { label: "Tous les articles", slug: null },
+  { label: "SEO Technique", slug: "seo-technique" },
+  { label: "IA & Contenu", slug: "ia-et-contenu" },
+  { label: "GEO", slug: "geo" },
+  { label: "Outils & Ressources", slug: "outils" },
+];
+---
+<Layout
+  title="Blog"
+  description="Articles de fond sur le SEO, l'IA et le GEO — référencement naturel, intelligence artificielle et optimisation pour les moteurs de recherche génératifs."
+>
+
+  <div class="page-header">
+    <h1>Le Blog</h1>
+    <p>SEO, IA et GEO — des analyses concrètes depuis le terrain.</p>
+  </div>
+
+  <div class="category-filter">
+    <div class="container">
+      {categories.map(cat => (
+        <a href={cat.slug ? `/blog/categorie/${cat.slug}` : '/blog'} class={`cat-pill ${!cat.slug ? 'active' : ''}`}>
+          {cat.label}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="blog-list">
+    <div class="cards-grid">
+      {posts.map(post => (
+        <article class="card">
+          {post.data.heroImage ? (
+            <img src={post.data.heroImage} alt={post.data.title} class="card-image" loading="lazy" />
+          ) : (
+            <div class="card-image-placeholder">{post.data.emoji || '🔍'}</div>
+          )}
+          <div class="card-body">
+            <a href={post.data.categorySlug ? `/blog/categorie/${post.data.categorySlug}` : '/blog'} class="card-category">
+              {post.data.category}
+            </a>
+            <h3><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
+            <p>{post.data.description}</p>
+            <div class="card-meta">
+              <span>{new Date(post.data.pubDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+              <span>·</span>
+              <span>{post.data.readTime} min</span>
+            </div>
+            {post.data.tags && (
+              <div style="margin-top: 0.85rem; display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                {post.data.tags.slice(0, 3).map((tag: string) => (
+                  <span style="font-size: 0.72rem; background: var(--color-teal-dim); color: var(--color-teal); padding: 0.2rem 0.6rem; border-radius: 20px; border: 1px solid var(--color-teal-border);">#{tag}</span>
+                ))}
+              </div>
+            )}
+            <a href={`/blog/${post.id}`} class="card-read-more" style="margin-top: 1rem; display: inline-flex;">Lire l'article</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <section class="seo-section">
+    <div class="container">
+      <div class="seo-block">
+        <h2>Un blog SEO écrit par une praticienne</h2>
+        <p>
+          <strong>Laura SEO</strong> est un blog spécialisé en <strong>référencement naturel</strong>, <strong>IA appliquée au SEO</strong> et <strong>GEO (Generative Engine Optimization)</strong>. Chaque article est rédigé par Laura, spécialiste SEO française basée à Montréal, à partir de cas concrets et d'expériences terrain. Pas de contenu générique : des analyses approfondies sur la <strong>structure technique des sites</strong>, l'utilisation de l'<strong>intelligence artificielle pour le contenu</strong>, et les stratégies pour être visible auprès des moteurs de recherche IA comme ChatGPT, Perplexity ou Claude.
+        </p>
+        <div class="seo-tags">
+          {["seo", "référencement naturel", "geo", "ia et seo", "chatgpt seo", "perplexity", "seo technique", "contenu ia", "montréal", "québec"].map(tag => (
+            <span class="seo-tag">#{tag}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,40 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: "/", label: "Accueil" },
+  { href: "/blog", label: "Blog" },
+  { href: "/a-propos", label: "À propos" },
+  { href: "/contact", label: "Contact", cta: true },
+];
+---
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo" aria-label="Accueil">
+      <span class="logo-title">
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:6px;">
+          <circle cx="16" cy="16" r="15" fill="rgba(0,212,176,0.15)" stroke="rgba(0,212,176,0.4)" stroke-width="1.5"/>
+          <path d="M10 22 Q16 8 22 22" stroke="#00d4b0" stroke-width="2" fill="none"/>
+          <circle cx="16" cy="13" r="3" fill="#00d4b0" opacity="0.9"/>
+          <path d="M8 18 L24 18" stroke="rgba(0,212,176,0.3)" stroke-width="1"/>
+        </svg>
+        Laura SEO
+      </span>
+      <span class="logo-subtitle">SEO · IA · GEO — L'expert au Québec</span>
+    </a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={[
+            "nav-link",
+            { active: currentPath === link.href || (link.href !== "/" && currentPath.startsWith(link.href)) },
+            { cta: link.cta }
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

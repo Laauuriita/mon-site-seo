@@ -1,0 +1,39 @@
+# Laura SEO
+
+> Blog expert sur le SEO, l'IA appliquée au contenu et le GEO (Generative Engine Optimization), écrit par Laura — spécialiste SEO française installée à Montréal, Québec, depuis 2021.
+
+## Auteur
+
+**Laura** — Spécialiste SEO avec expertise en référencement naturel, IA générative et GEO. Nageuse sauveteur de haut niveau, basée à Montréal. Combine rigueur technique et pédagogie pour rendre le SEO accessible.
+
+## À propos du site
+
+Ce blog publie des articles de fond sur :
+- Le **SEO technique** (Core Web Vitals, structure, crawl, logs serveur)
+- L'**IA et le contenu** (LLM, génération de contenu, détection IA)
+- Le **GEO** (Generative Engine Optimization — être cité par ChatGPT, Perplexity, Claude)
+- Les **outils & ressources** (Screaming Frog, SEMrush, GSC, automatisation)
+
+Tous les articles sont rédigés en français, avec un angle pratique et des exemples concrets.
+
+## Catégories
+
+- **SEO Technique** (/blog/categorie/seo-technique) — audit, crawl, vitesse, balises, maillage
+- **IA & Contenu** (/blog/categorie/ia-et-contenu) — rédaction IA, prompts SEO, détection
+- **GEO** (/blog/categorie/geo) — optimisation pour les IA conversationnelles
+- **Outils & Ressources** (/blog/categorie/outils) — comparatifs, tutoriels, workflows
+
+## Pages principales
+
+- / — Accueil
+- /blog — Tous les articles
+- /a-propos — Parcours et expertise de Laura
+- /contact — Formulaire de contact
+
+## Informations
+
+- Langue : Français (fr-CA)
+- Localisation : Montréal, Québec, Canada
+- Fréquence de publication : hebdomadaire
+- Technologie : Astro (site statique, performances maximales)
+- Sitemap : /sitemap-index.xml

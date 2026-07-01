@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  author?: string;
+}
+
+const {
+  title,
+  description = "Spécialiste SEO française au Québec — articles de fond sur le référencement naturel, l'IA appliquée au contenu et le GEO (Generative Engine Optimization).",
+  image = "/og-image.jpg",
+  type = "website",
+  publishedTime,
+  author = "Laura",
+} = Astro.props;
+
+const siteUrl = "https://mon-site-seo.vercel.app";
+const fullTitle = title === "Accueil" ? "Laura SEO — Spécialiste SEO, IA & GEO au Québec" : `${title} | Laura SEO`;
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+
+const schemaOrg = type === "article" ? {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "url": canonicalUrl,
+  "datePublished": publishedTime,
+  "inLanguage": "fr-CA",
+  "author": {
+    "@type": "Person",
+    "name": author,
+    "url": `${siteUrl}/a-propos`,
+    "jobTitle": "Spécialiste SEO",
+    "description": "Experte en référencement naturel, IA et GEO, basée à Montréal, Québec"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Laura SEO",
+    "url": siteUrl
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalUrl }
+} : {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Laura SEO",
+  "description": description,
+  "url": siteUrl,
+  "inLanguage": "fr-CA",
+  "author": {
+    "@type": "Person",
+    "name": "Laura",
+    "jobTitle": "Spécialiste SEO",
+    "description": "Experte SEO française au Québec, spécialisée en IA et GEO"
+  }
+};
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${image}`} />
+    <meta property="og:locale" content="fr_CA" />
+    <meta property="og:site_name" content="Laura SEO" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${image}`} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#091420" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
