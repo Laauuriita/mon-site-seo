@@ -1,6 +1,6 @@
-# Laura SEO
+# Lagon Web
 
-> Blog expert sur le SEO, l'IA appliquée au contenu et le GEO (Generative Engine Optimization), écrit par Laura — spécialiste SEO française installée à Montréal, Québec, depuis 2021.
+> Blog expert sur le SEO, l'IA appliquée au contenu, les LLM et le GEO (Generative Engine Optimization), écrit par Laura — spécialiste SEO française installée à Montréal, Québec, depuis 2021.
 
 ## Auteur
 

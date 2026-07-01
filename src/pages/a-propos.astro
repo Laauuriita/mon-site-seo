@@ -62,7 +62,7 @@ import Layout from '../layouts/Layout.astro';
         <div style="position: absolute; left: 0.6rem; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--color-teal), transparent); opacity: 0.4;"></div>
 
         {[
-          { year: "2025", title: "Lancement de Laura SEO", desc: "Création de ce blog pour partager mes analyses sur le SEO, l'IA et le GEO." },
+          { year: "2025", title: "Lancement de Lagon Web", desc: "Création de ce blog pour partager mes analyses sur le SEO, l'IA et le GEO." },
           { year: "2023", title: "Spécialisation IA & GEO", desc: "Avec l'émergence de ChatGPT et Perplexity, je me spécialise dans l'optimisation pour les IA conversationnelles." },
           { year: "2021", title: "Installation au Québec", desc: "Arrivée à Montréal. Je continue à travailler avec des clients français et québécois." },
           { year: "2018", title: "SEO Senior & Consulting", desc: "Premières missions de conseil SEO pour des marques e-commerce et médias en France." },
@@ -71,7 +71,7 @@ import Layout from '../layouts/Layout.astro';
           <div style="position: relative; padding: 0 0 2rem 1.5rem;">
             <div style="position: absolute; left: -1.5rem; top: 0.4rem; width: 10px; height: 10px; border-radius: 50%; background: var(--color-teal); box-shadow: 0 0 0 3px var(--color-teal-dim);"></div>
             <div style="font-size: 0.75rem; font-weight: 700; color: var(--color-teal); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem;">{item.year}</div>
-            <h4 style="font-size: 1rem; font-family: var(--font-body); font-weight: 600; color: var(--color-white); margin-bottom: 0.35rem;">{item.title}</h4>
+            <h4 style="font-size: 1rem; font-family: var(--font-body); font-weight: 600; color: var(--color-heading); margin-bottom: 0.35rem;">{item.title}</h4>
             <p style="font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.6;">{item.desc}</p>
           </div>
         ))}
@@ -102,7 +102,7 @@ import Layout from '../layouts/Layout.astro';
 .fact-card:hover { border-color: var(--color-teal-border); }
 .fact-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
 .fact-label { font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-.fact-value { font-size: 1rem; font-weight: 600; color: var(--color-white); margin-top: 0.25rem; }
+.fact-value { font-size: 1rem; font-weight: 600; color: var(--color-heading); margin-top: 0.25rem; }
 @media (max-width: 768px) {
   .about-grid { grid-template-columns: 1fr; }
   .about-avatar-placeholder { max-width: 160px; margin: 0 auto; }

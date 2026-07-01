@@ -1,17 +1,106 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
+const allPosts = await getCollection('blog');
+const latestPosts = allPosts
+  .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
+  .slice(0, 3);
 ---
+<Layout title="Accueil">
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-eyebrow">SEO · IA · GEO · LLM</span>
+      <h1>
+        Le référencement,
+        <span class="accent">à l'ère des IA</span>
+      </h1>
+      <p>
+        Des analyses concrètes sur le SEO technique, l'IA appliquée au contenu et le GEO — comment rester visible quand Google, ChatGPT, Perplexity et Claude décident qui mérite d'être lu.
+      </p>
+      <div class="hero-actions">
+        <a href="/blog" class="btn btn-primary">Lire le blog</a>
+        <a href="/a-propos" class="btn btn-outline">Qui écrit ici ?</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Ce qu'on explore ici</h2>
+        <p>Quatre angles pour comprendre la visibilité en ligne aujourd'hui.</p>
+        <div class="divider"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="icon">🔧</div>
+          <h3>SEO Technique</h3>
+          <p>Crawl, indexation, Core Web Vitals, logs serveur — la mécanique qui fait qu'un site est trouvable, ou pas.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">✍️</div>
+          <h3>IA & Contenu</h3>
+          <p>Utiliser les LLM pour produire du contenu qui ranke — sans tomber dans le générique que Google déclasse.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🛰️</div>
+          <h3>GEO</h3>
+          <p>Generative Engine Optimization : être cité dans les réponses de ChatGPT, Perplexity et Claude.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🧰</div>
+          <h3>Outils & Ressources</h3>
+          <p>Screaming Frog, Search Console, automatisations — les outils du quotidien, testés sur de vrais sites.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Derniers articles</h2>
+        <p>Écrits depuis le terrain, pas depuis un prompt.</p>
+        <div class="divider"></div>
+      </div>
+      <div class="cards-grid">
+        {latestPosts.map(post => (
+          <article class="card">
+            {post.data.heroImage ? (
+              <img src={post.data.heroImage} alt={post.data.title} class="card-image" loading="lazy" />
+            ) : (
+              <div class="card-image-placeholder">{post.data.emoji || '🌊'}</div>
+            )}
+            <div class="card-body">
+              <span class="card-category">{post.data.category}</span>
+              <h3><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
+              <p>{post.data.description}</p>
+              <div class="card-meta">
+                <span>{new Date(post.data.pubDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                <span>·</span>
+                <span>{post.data.readTime} min</span>
+              </div>
+              <a href={`/blog/${post.id}`} class="card-read-more">Lire l'article</a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div style="text-align: center; margin-top: 2.5rem;">
+        <a href="/blog" class="btn btn-outline">Tous les articles</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-section">
+        <h2>Une question SEO, IA ou GEO ?</h2>
+        <p>Audit, conseil, formation ou simple échange — le formulaire de contact est fait pour ça.</p>
+        <a href="/contact" class="btn btn-primary">Me contacter</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
