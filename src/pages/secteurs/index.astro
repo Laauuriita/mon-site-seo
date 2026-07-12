@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const secteurs = [
+  {
+    slug: "seo-ecommerce",
+    emoji: "🛒",
+    titre: "E-commerce",
+    accroche: "Boutiques en ligne, Shopify, WooCommerce, marketplaces",
+    desc: "Des milliers de pages produits, des filtres qui créent du contenu dupliqué, une saisonnalité forte. Le SEO e-commerce est un métier à part entière.",
+  },
+  {
+    slug: "seo-b2b",
+    emoji: "🏢",
+    titre: "B2B & SaaS",
+    accroche: "Éditeurs de logiciels, services aux entreprises, cabinets",
+    desc: "Cycle de vente long, audience de niche, décideurs exigeants. Ici le SEO sert à générer des leads qualifiés, pas juste du trafic.",
+  },
+  {
+    slug: "seo-local",
+    emoji: "📍",
+    titre: "Commerce local",
+    accroche: "Commerces, artisans, professions libérales, franchises",
+    desc: "Votre clientèle est à quelques kilomètres. Google Business Profile, pack local, avis clients : le référencement local a ses propres règles.",
+  },
+  {
+    slug: "seo-media",
+    emoji: "📰",
+    titre: "Média & Éditeur",
+    accroche: "Blogs, magazines, sites d'information, créateurs de contenu",
+    desc: "Beaucoup de contenu, une actualité qui bouge vite, l'enjeu de Google Discover et de l'autorité thématique. Le SEO éditorial est un marathon.",
+  },
+];
+---
+<Layout
+  title="Pour qui ?"
+  description="Le SEO n'est pas le même selon votre type de site. E-commerce, B2B, commerce local ou média : découvrez mon approche du référencement adaptée à votre secteur."
+>
+  <div class="page-header">
+    <span class="card-category" style="display:inline-block;margin-bottom:1rem;">Pour qui ?</span>
+    <h1>Le SEO n'est pas le même pour tout le monde</h1>
+    <p>Une boutique en ligne, un logiciel B2B, un commerce de quartier et un média n'ont ni les mêmes clients, ni les mêmes requêtes, ni les mêmes leviers. Voici mon approche selon votre secteur.</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="cards-grid">
+        {secteurs.map(s => (
+          <article class="card">
+            <div class="card-image-placeholder">{s.emoji}</div>
+            <div class="card-body">
+              <span class="card-category">{s.accroche}</span>
+              <h3><a href={`/secteurs/${s.slug}`}>{s.titre}</a></h3>
+              <p>{s.desc}</p>
+              <a href={`/secteurs/${s.slug}`} class="card-read-more">Voir mon approche</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="cta-section">
+        <h2>Votre site ne rentre dans aucune case ?</h2>
+        <p>Institutionnel, association, portfolio, plateforme… Chaque projet est différent. Parlons du vôtre, sans engagement.</p>
+        <a href="/contact" class="btn btn-primary">Me contacter</a>
+      </div>
+    </div>
+  </section>
+</Layout>

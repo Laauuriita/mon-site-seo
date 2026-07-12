@@ -32,7 +32,10 @@
   --color-heading:     #325363;
   --color-text:        #3c525e;
   --color-text-muted:  #64808c;
-  --color-coral:       #f18c79;
+  --color-coral:       #ff6a3d;
+  --color-coral-dark:  #d84a20;
+  --color-coral-dim:   rgba(255, 106, 61, 0.12);
+  --color-coral-border:rgba(255, 106, 61, 0.3);
   --color-white:       #ffffff;
   --color-border:      rgba(50, 83, 99, 0.12);
 
@@ -99,11 +102,12 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 68px;
+  min-height: 80px;
+  padding: 0.75rem 0;
 }
 
-.logo { display: flex; flex-direction: column; text-decoration: none; gap: 0.15rem; }
-.logo-img { height: 42px; width: auto; }
+.logo { display: flex; flex-direction: column; text-decoration: none; gap: 0.2rem; line-height: 1; }
+.logo-img { height: 34px; width: auto; display: block; }
 .logo-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--color-heading); letter-spacing: -0.01em; }
 .logo-subtitle { font-size: 0.65rem; color: var(--color-text-muted); letter-spacing: 0.12em; text-transform: uppercase; }
 .logo:hover .logo-title { color: var(--color-teal); }
@@ -121,8 +125,8 @@ h1, h2, h3, h4 {
 }
 .nav-link:hover { color: var(--color-teal-light); background: var(--color-teal-dim); }
 .nav-link.active { color: var(--color-teal); background: var(--color-teal-dim); border: 1px solid var(--color-teal-border); }
-.nav-link.cta { background-color: var(--color-teal); color: var(--color-white); font-weight: 600; padding: 0.45rem 1rem; }
-.nav-link.cta:hover { background-color: var(--color-teal-light); color: var(--color-white); }
+.nav-link.cta { background-color: var(--color-coral); color: var(--color-white); font-weight: 600; padding: 0.45rem 1rem; }
+.nav-link.cta:hover { background-color: var(--color-coral-dark); color: var(--color-white); }
 
 /* BOUTONS */
 .btn {
@@ -137,8 +141,8 @@ h1, h2, h3, h4 {
   text-align: center;
   font-family: var(--font-body);
 }
-.btn-primary { background-color: var(--color-teal); color: var(--color-white); }
-.btn-primary:hover { background-color: var(--color-teal-light); color: var(--color-white); transform: translateY(-2px); box-shadow: var(--shadow-teal); }
+.btn-primary { background-color: var(--color-coral); color: var(--color-white); }
+.btn-primary:hover { background-color: var(--color-coral-dark); color: var(--color-white); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(255, 106, 61, 0.28); }
 .btn-outline { background-color: transparent; color: var(--color-teal); border: 1.5px solid var(--color-teal-border); }
 .btn-outline:hover { background-color: var(--color-teal-dim); color: var(--color-teal-light); border-color: var(--color-teal); transform: translateY(-2px); }
 
@@ -171,7 +175,7 @@ h1, h2, h3, h4 {
   margin-bottom: 1.75rem;
 }
 .hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); color: var(--color-heading); margin-bottom: 1.25rem; font-weight: 900; }
-.hero h1 .accent { color: var(--color-teal); display: block; }
+.hero h1 .accent { color: var(--color-coral); display: block; }
 .hero p { font-size: 1.1rem; color: var(--color-text-muted); margin-bottom: 2.5rem; max-width: 580px; margin-left: auto; margin-right: auto; line-height: 1.7; }
 .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
@@ -183,7 +187,7 @@ h1, h2, h3, h4 {
 .section-header h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); color: var(--color-heading); margin-bottom: 0.75rem; }
 .section-header p { color: var(--color-text-muted); font-size: 1rem; max-width: 520px; margin: 0 auto; }
 
-.divider { width: 48px; height: 3px; background: var(--color-teal); margin: 1rem auto 0; border-radius: 2px; }
+.divider { width: 48px; height: 3px; background: var(--color-coral); margin: 1rem auto 0; border-radius: 2px; }
 
 /* FEATURE CARDS (accueil) */
 .features-grid {
@@ -310,8 +314,8 @@ h1, h2, h3, h4 {
 .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius); font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); background: var(--color-bg); transition: border-color var(--transition); }
 .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--color-teal); box-shadow: 0 0 0 3px var(--color-teal-dim); }
 .form-group textarea { resize: vertical; min-height: 140px; }
-.form-submit { width: 100%; padding: 0.9rem; background: var(--color-teal); color: var(--color-white); border: none; border-radius: var(--radius); font-size: 1rem; font-weight: 700; cursor: pointer; transition: all var(--transition); font-family: var(--font-body); }
-.form-submit:hover { background: var(--color-teal-light); transform: translateY(-1px); box-shadow: var(--shadow-teal); }
+.form-submit { width: 100%; padding: 0.9rem; background: var(--color-coral); color: var(--color-white); border: none; border-radius: var(--radius); font-size: 1rem; font-weight: 700; cursor: pointer; transition: all var(--transition); font-family: var(--font-body); }
+.form-submit:hover { background: var(--color-coral-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(255, 106, 61, 0.28); }
 
 /* FOOTER */
 .site-footer { background-color: #325363; color: rgba(255,255,255,0.65); padding: 3.5rem 1.5rem 1.5rem; margin-top: auto; }
